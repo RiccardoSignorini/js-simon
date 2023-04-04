@@ -25,13 +25,13 @@ setTimeout(function(){
 
 // CANCELLAZIONE NUMERI
 setTimeout(function(){
-    randomList.innerHTML = ''
+    randomList.classList.add('none')
 },10000)
 
 // COMPARSA PROMPT
 let userNum = setTimeout(function(){
-    for(i=0; i<5; i++){
-        let num = parseInt(prompt('Scrivi il numero 1'))
+    for(i=1; i<=5; i++){
+        let num = parseInt(prompt(`Scrivi il numero ${[i]}`))
         console.log(`il numero è ${num}`)
     }
 },11000)
