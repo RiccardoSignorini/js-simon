@@ -5,18 +5,20 @@ Dopo 30 secondi i numeri scompaiono e l'utente deve inserire, uno alla volta, i 
 Dopo che sono stati inseriti i 5 numeri, il software dice quanti e quali dei numeri da indovinare sono stati individuati.
 */
 
+// FUNZIONE NUMERI RANDOM
+function randomNum(min, max){
+    return Math.floor(Math.random()*max)+min
+}
+
 // COSTANTI E VARIABILI
 const randomList = document.querySelector('#random-list')
 
 let clockNum = setInterval(function(){
     // INTERVALLI DI STAMPA IN PAGINA
-    randomList.innerHTML += `<li>${randomNum(1,50)}</li>`
+    randomList.innerHTML += `<li>${randomNum(1,100)}</li>`
 },1000)
 
-// FUNZIONE NUMERI RANDOM
-function randomNum(min, max){
-    return Math.floor(Math.random()*max)+min
-}
+let resultsList = document.querySelector('#results')
 
 // BLOCCO INTERVALLI DI STAMPA
 setTimeout(function(){
@@ -26,12 +28,14 @@ setTimeout(function(){
 // CANCELLAZIONE NUMERI
 setTimeout(function(){
     randomList.classList.add('none')
-},10000)
+},30000)
 
 // COMPARSA PROMPT
-let userNum = setTimeout(function(){
+setTimeout(function(){
     for(i=1; i<=5; i++){
-        let num = parseInt(prompt(`Scrivi il numero ${[i]}`))
-        console.log(`il numero è ${num}`)
+        var userNum = parseInt(prompt(`Scrivi il numero ${[i]}`))
+        console.log(`il numero è ${userNum}`)
+        resultsList.innerHTML += `<li>${userNum}</li>`
     }
-},11000)
+    randomList.classList.add('block')
+},33000)

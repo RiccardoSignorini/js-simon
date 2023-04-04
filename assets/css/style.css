@@ -3,5 +3,9 @@
 }
 
 .block{
-    display: block;
+    display: block!important;
+}
+
+.container div{
+    margin-right: 5rem;
 }
