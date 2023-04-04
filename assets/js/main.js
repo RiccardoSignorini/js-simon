@@ -13,29 +13,37 @@ function randomNum(min, max){
 // COSTANTI E VARIABILI
 const randomList = document.querySelector('#random-list')
 
-let clockNum = setInterval(function(){
-    // INTERVALLI DI STAMPA IN PAGINA
-    randomList.innerHTML += `<li>${randomNum(1,100)}</li>`
-},1000)
+const gameButton = document.querySelector('button')
 
 let resultsList = document.querySelector('#results')
 
-// BLOCCO INTERVALLI DI STAMPA
-setTimeout(function(){
-    clearInterval(clockNum)
-},5000)
+let clockNum
 
-// CANCELLAZIONE NUMERI
-setTimeout(function(){
-    randomList.classList.add('none')
-},30000)
+gameButton.addEventListener('click', function(){
+    
+    let clockNum = setInterval(function(){
+        // INTERVALLI DI STAMPA IN PAGINA
+        randomList.innerHTML += `<li>${randomNum(1,100)}</li>`
+    },1000)
 
-// COMPARSA PROMPT
-setTimeout(function(){
-    for(i=1; i<=5; i++){
-        var userNum = parseInt(prompt(`Scrivi il numero ${[i]}`))
-        console.log(`il numero è ${userNum}`)
-        resultsList.innerHTML += `<li>${userNum}</li>`
-    }
-    randomList.classList.add('block')
-},33000)
+    // BLOCCO INTERVALLI DI STAMPA
+    setTimeout(function(){
+        clearInterval(clockNum)
+    },5000)
+
+    // CANCELLAZIONE NUMERI
+    setTimeout(function(){
+        randomList.classList.add('none')
+    },30000)
+
+    // COMPARSA PROMPT
+    setTimeout(function(){
+        for(i=1; i<=5; i++){
+            var userNum = parseInt(prompt(`Scrivi il numero ${[i]}`))
+            console.log(`il numero è ${userNum}`)
+            resultsList.innerHTML += `<li>${userNum}</li>`
+        }
+        randomList.classList.add('block')
+    },33000)
+})
+
