@@ -17,33 +17,55 @@ const gameButton = document.querySelector('button')
 
 let resultsList = document.querySelector('#results')
 
-let clockNum
+let intervalNum
 
+let randomNum1 = []
+
+let results = []
+
+// PUSH NEL CONTENITORE
+while(randomNum1.length<5){
+    let randomNum2 = randomNum(1,100)
+
+    if(!randomNum1.includes(randomNum)){
+        randomNum1.push(randomNum2)
+    }
+}
+console.log(randomNum1)
+
+// EVENTI AL CLICK
 gameButton.addEventListener('click', function(){
-    
-    let clockNum = setInterval(function(){
+
+    intervalNum = setInterval(function(){
         // INTERVALLI DI STAMPA IN PAGINA
-        randomList.innerHTML += `<li>${randomNum(1,100)}</li>`
-    },1000)
+        for(i=0; i<5; i++){
+            randomList.innerHTML += `<li>${randomNum1[i]}</li>`
+        }
+    },2000)
 
     // BLOCCO INTERVALLI DI STAMPA
     setTimeout(function(){
-        clearInterval(clockNum)
-    },5000)
+        clearInterval(intervalNum)
+    },2100)
 
     // CANCELLAZIONE NUMERI
     setTimeout(function(){
         randomList.classList.add('none')
-    },30000)
+    },10000)
 
     // COMPARSA PROMPT
     setTimeout(function(){
         for(i=1; i<=5; i++){
-            var userNum = parseInt(prompt(`Scrivi il numero ${[i]}`))
+            var userNum = parseInt(prompt(`Ti ricordi il numero ${[i]}?`))
             console.log(`il numero è ${userNum}`)
             resultsList.innerHTML += `<li>${userNum}</li>`
-        }
-        randomList.classList.add('block')
-    },33000)
-})
 
+            if(!results.includes(userNum)){
+                results.push(userNum)
+            }
+        }
+        // RICOMPARSA NUMERI
+        randomList.classList.add('block')
+        console.log(results)
+    },13000)
+})
