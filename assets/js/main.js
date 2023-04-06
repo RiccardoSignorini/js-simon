@@ -11,15 +11,21 @@ function randomNum(min, max){
 }
 
 // COSTANTI E VARIABILI
-const randomList = document.querySelector('#random-list')
-
 const gameButton = document.querySelector('button')
 
-let resultsList = document.querySelector('#results')
+const randomList = document.querySelector('#random-list')
+
+const memoryUserList = document.querySelector('#user-memory')
+
+const sentenceResults = document.querySelector('#sentence-results')
+
+const resultsList = document.querySelector('#results-list')
 
 let intervalNum
 
 let randomNum1 = []
+
+let memoryNum = []
 
 let results = []
 
@@ -53,19 +59,35 @@ gameButton.addEventListener('click', function(){
         randomList.classList.add('none')
     },10000)
 
-    // COMPARSA PROMPT
     setTimeout(function(){
+        // COMPARSA PROMPT
         for(i=1; i<=5; i++){
             var userNum = parseInt(prompt(`Ti ricordi il numero ${[i]}?`))
             console.log(`il numero è ${userNum}`)
-            resultsList.innerHTML += `<li>${userNum}</li>`
+            memoryUserList.innerHTML += `<li>${userNum}</li>`
 
-            if(!results.includes(userNum)){
-                results.push(userNum)
+            if(!memoryNum.includes(userNum)){
+                memoryNum.push(userNum)
             }
         }
         // RICOMPARSA NUMERI
         randomList.classList.add('block')
+        console.log(memoryNum)
+        // CONTROLLO NUMERI
+        for(n=0; n<memoryNum.length; n++){
+            if(randomNum1.includes(memoryNum[n])){
+                results.push(memoryNum[n])
+            }
+        }
         console.log(results)
+        // STAMPA RISULTATI
+        if(results.length==0){
+            sentenceResults.innerHTML = `Hai indovinato ${results.length} numeri, riprova!` 
+        } else if (results.length>0){
+            sentenceResults.innerHTML = `Hai indovinato ${results.length} numeri e sono:`
+            for(n=0; n<results.length; n++){
+                resultsList.innerHTML += `<li>${results[n]}</li>`
+            }
+        }
     },13000)
 })
